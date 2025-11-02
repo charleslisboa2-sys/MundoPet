@@ -1,7 +1,55 @@
-// Script principal do MundoPet
+// Script principal consolidado do MundoPet
 
 document.addEventListener('DOMContentLoaded', function() {
-    // ===== MENU HAMBÚRGUER =====
+    
+    // ===== FUNÇÕES UTILITÁRIAS =====
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            const closeButtons = modal.querySelectorAll('.modal-close, [data-modal-close]');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+    }
+
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.classList.add('show'), 100);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 5000);
+        
+        toast.addEventListener('click', () => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        });
+    }
+
+    // ===== NAVEGAÇÃO (Todas as páginas) =====
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     
@@ -10,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
             
-            // Animar as barras do hambúrguer
             const spans = navToggle.querySelectorAll('span');
             if (navMenu.classList.contains('active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
@@ -23,13 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Fechar menu ao clicar em um link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
-                
                 const spans = navToggle.querySelectorAll('span');
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
@@ -37,121 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
-    // ===== FORMULÁRIO DE NEWSLETTER =====
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const emailInput = this.querySelector('input[type="email"]');
-            const email = emailInput.value.trim();
-            
-            if (validateEmail(email)) {
-                // Simular envio bem-sucedido
-                showModal('success-modal');
-                emailInput.value = '';
-                
-                // Em uma aplicação real, aqui faríamos uma requisição AJAX
-                console.log('Email cadastrado:', email);
-            } else {
-                showToast('Por favor, insira um email válido.', 'error');
-            }
-        });
-    }
-    
-    // ===== MODAL FUNCTIONS =====
-    function showModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Fechar modal ao clicar no botão de fechar
-            const closeButtons = modal.querySelectorAll('.modal-close, [data-modal-close]');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-            
-            // Fechar modal ao clicar fora do conteúdo
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-    }
-    
-    // ===== TOAST FUNCTIONS =====
-    function showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
-        toast.textContent = message;
-        
-        document.body.appendChild(toast);
-        
-        // Mostrar toast
-        setTimeout(() => {
-            toast.classList.add('show');
-        }, 100);
-        
-        // Remover toast após 5 segundos
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 300);
-        }, 5000);
-        
-        // Fechar toast ao clicar
-        toast.addEventListener('click', () => {
-            toast.classList.remove('show');
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 300);
-        });
-    }
-    
-    // ===== VALIDAÇÃO DE EMAIL =====
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    // ===== ANIMAÇÃO DE SCROLL =====
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-            }
-        });
-    }, observerOptions);
-    
-    // Observar elementos para animação
-    const elementsToAnimate = document.querySelectorAll('.highlight-card, .pet-card, .section-title');
-    elementsToAnimate.forEach(el => {
-        observer.observe(el);
-    });
-    
+
     // ===== DROPDOWN MENU PARA MOBILE =====
     const dropdowns = document.querySelectorAll('.dropdown');
-    
     dropdowns.forEach(dropdown => {
         const link = dropdown.querySelector('.nav-link');
-        
         link.addEventListener('click', (e) => {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
@@ -159,59 +93,36 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // ===== CARREGAMENTO DE IMAGENS =====
-    const images = document.querySelectorAll('img');
-    
-    images.forEach(img => {
-        // Adicionar loading lazy para melhor performance
-        if (!img.loading) {
-            img.loading = 'lazy';
-        }
-        
-        // Tratar erro de carregamento de imagem
-        img.addEventListener('error', function() {
-            this.src = 'assets/img/placeholder.jpg';
-            this.alt = 'Imagem não disponível';
-        });
-    });
-    
-    // ===== BOTÕES COM ESTADOS DE CARREGAMENTO =====
-    const buttons = document.querySelectorAll('.btn');
-    
-    buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            if (this.classList.contains('btn-loading')) return;
+
+    // ===== NEWSLETTER (Index) =====
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value.trim();
             
-            // Simular estado de loading em alguns botões
-            if (this.type === 'submit' || this.getAttribute('href') === '#') {
-                const originalText = this.innerHTML;
-                this.innerHTML = '<span class="loading"><span class="loading-spinner"></span>Carregando...</span>';
-                this.classList.add('btn-loading');
-                
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.classList.remove('btn-loading');
-                }, 2000);
+            if (validateEmail(email)) {
+                showModal('success-modal');
+                emailInput.value = '';
+                console.log('Email cadastrado:', email);
+            } else {
+                showToast('Por favor, insira um email válido.', 'error');
             }
         });
-    });
+    }
 
-    // ===== FILTROS DE ANIMAIS (página adoção) =====
+    // ===== ADOÇÃO (Página adoção) =====
     const speciesFilter = document.getElementById('species');
-    const sizeFilter = document.getElementById('size');
-    const ageFilter = document.getElementById('age');
-    const genderFilter = document.getElementById('gender');
     const petCards = document.querySelectorAll('.pet-card');
-    const petsCount = document.getElementById('pets-count');
-
+    
     function filterPets() {
-        if (!speciesFilter) return; // Só executa na página de adoção
+        if (!speciesFilter) return;
 
         const speciesValue = speciesFilter.value;
-        const sizeValue = sizeFilter.value;
-        const ageValue = ageFilter.value;
-        const genderValue = genderFilter.value;
+        const sizeValue = document.getElementById('size')?.value || 'all';
+        const ageValue = document.getElementById('age')?.value || 'all';
+        const genderValue = document.getElementById('gender')?.value || 'all';
 
         let visibleCount = 0;
 
@@ -234,16 +145,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        if (petsCount) {
-            petsCount.textContent = visibleCount;
-        }
+        const petsCount = document.getElementById('pets-count');
+        if (petsCount) petsCount.textContent = visibleCount;
     }
 
     // Adicionar event listeners aos filtros
     if (speciesFilter) speciesFilter.addEventListener('change', filterPets);
-    if (sizeFilter) sizeFilter.addEventListener('change', filterPets);
-    if (ageFilter) ageFilter.addEventListener('change', filterPets);
-    if (genderFilter) genderFilter.addEventListener('change', filterPets);
+    if (document.getElementById('size')) document.getElementById('size').addEventListener('change', filterPets);
+    if (document.getElementById('age')) document.getElementById('age').addEventListener('change', filterPets);
+    if (document.getElementById('gender')) document.getElementById('gender').addEventListener('change', filterPets);
 
     // ===== MODAL DE ANIMAIS (página adoção) =====
     const petModal = document.getElementById('pet-modal');
@@ -351,54 +261,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== VALIDAÇÃO DO FORMULÁRIO DE CONTATO =====
+    // ===== CONTATO (Página contato) =====
     const contactForm = document.getElementById('contact-form');
-
-    function validateContactForm() {
-        let isValid = true;
-        clearContactErrors();
-
-        // Validar nome
-        const name = document.getElementById('name');
-        if (name && !name.value.trim()) {
-            showContactError('name', 'Por favor, insira seu nome completo.');
-            isValid = false;
-        }
-
-        // Validar email
-        const email = document.getElementById('email');
-        if (email && !email.value.trim()) {
-            showContactError('email', 'Por favor, insira seu e-mail.');
-            isValid = false;
-        } else if (email && !validateEmail(email.value)) {
-            showContactError('email', 'Por favor, insira um e-mail válido.');
-            isValid = false;
-        }
-
-        // Validar assunto
-        const subject = document.getElementById('subject');
-        if (subject && !subject.value) {
-            showContactError('subject', 'Por favor, selecione um assunto.');
-            isValid = false;
-        }
-
-        // Validar mensagem
-        const message = document.getElementById('message');
-        if (message && !message.value.trim()) {
-            showContactError('message', 'Por favor, insira sua mensagem.');
-            isValid = false;
-        } else if (message && message.value.trim().length < 10) {
-            showContactError('message', 'A mensagem deve ter pelo menos 10 caracteres.');
-            isValid = false;
-        }
-
-        return isValid;
-    }
-
+    
     function showContactError(fieldName, message) {
         const errorElement = document.getElementById(fieldName + '-error');
         const inputElement = document.getElementById(fieldName);
-        
         if (errorElement && inputElement) {
             errorElement.textContent = message;
             inputElement.classList.add('error');
@@ -406,24 +274,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function clearContactErrors() {
-        const errorElements = document.querySelectorAll('.error-message');
-        const inputElements = document.querySelectorAll('.form-input, .form-select, .form-textarea');
-        
-        errorElements.forEach(element => {
-            element.textContent = '';
+        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+        document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => el.classList.remove('error'));
+    }
+
+    function validateContactForm() {
+        let isValid = true;
+        clearContactErrors();
+
+        const fields = [
+            { id: 'name', validator: (v) => v && v.length >= 2, error: 'Nome deve ter pelo menos 2 caracteres' },
+            { id: 'email', validator: validateEmail, error: 'E-mail inválido' },
+            { id: 'subject', validator: (v) => v, error: 'Selecione um assunto' },
+            { id: 'message', validator: (v) => v && v.length >= 10, error: 'Mensagem deve ter pelo menos 10 caracteres' }
+        ];
+
+        fields.forEach(({ id, validator, error }) => {
+            const field = document.getElementById(id);
+            if (field && field.hasAttribute('required')) {
+                if (!validator(field.value.trim())) {
+                    showContactError(id, error);
+                    isValid = false;
+                }
+            }
         });
-        
-        inputElements.forEach(element => {
-            element.classList.remove('error');
-        });
+
+        return isValid;
     }
 
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
             if (validateContactForm()) {
-                // Simular envio do formulário
                 const submitButton = this.querySelector('button[type="submit"]');
                 const originalText = submitButton.innerHTML;
                 
@@ -431,24 +313,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitButton.disabled = true;
 
                 setTimeout(() => {
-                    // Mostrar modal de sucesso
                     showModal('success-modal');
-                    
-                    // Resetar formulário
                     contactForm.reset();
                     clearContactErrors();
-                    
-                    // Restaurar botão
                     submitButton.innerHTML = originalText;
                     submitButton.disabled = false;
                 }, 2000);
             }
         });
+
+        // Validação em tempo real
+        document.querySelectorAll('#contact-form input, #contact-form select, #contact-form textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required')) {
+                    const value = this.value.trim();
+                    if (!value) showContactError(this.id, 'Campo obrigatório');
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorElement = document.getElementById(this.id + '-error');
+                if (errorElement) errorElement.textContent = '';
+            });
+        });
     }
 
     // ===== FAQ ACCORDION (página contato) =====
     const faqItems = document.querySelectorAll('.faq-item');
-    
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         const answer = item.querySelector('.faq-answer');
@@ -503,6 +395,55 @@ document.addEventListener('DOMContentLoaded', function() {
             e.target.value = value;
         });
     }
+
+    // ===== OTIMIZAÇÕES GERAIS =====
     
+    // Lazy loading para imagens
+    if ('loading' in HTMLImageElement.prototype) {
+        document.querySelectorAll('img').forEach(img => {
+            img.loading = 'lazy';
+        });
+    }
+
+    // Tratar erro de carregamento de imagem
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function() {
+            this.src = 'assets/img/placeholder.jpg';
+            this.alt = 'Imagem não disponível';
+        });
+    });
+
+    // Botões com estados de carregamento
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (this.classList.contains('btn-loading')) return;
+            
+            // Simular estado de loading em alguns botões
+            if (this.type === 'submit' || this.getAttribute('href') === '#') {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span class="loading"><span class="loading-spinner"></span>Carregando...</span>';
+                this.classList.add('btn-loading');
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.classList.remove('btn-loading');
+                }, 2000);
+            }
+        });
+    });
+
+    // Animações de scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.highlight-card, .pet-card, .section-title').forEach(el => {
+        observer.observe(el);
+    });
+
     console.log('MundoPet - Sistema carregado com sucesso!');
 });
