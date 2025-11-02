@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoção - MundoPet</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">🐾</span>
+                    MundoPet
+                </a>
+                
+                <nav class="nav">
+                    <button class="nav-toggle" aria-label="Abrir menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="sobre.html" class="nav-link">Sobre</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="sobre.html#missao">Nossa Missão</a></li>
+                                <li><a href="sobre.html#equipe">Nossa Equipe</a></li>
+                                <li><a href="sobre.html#historia">Nossa História</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="adocao.html" class="nav-link active">Adoção</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contatos.html" class="nav-link">Contatos</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">Encontre seu novo amigo</h1>
+                        <p class="hero-description">Todos os nossos animais são vacinados, vermifugados e castrados. Conheça nossos peludos que estão esperando por um lar.</p>
+                    </div>
+                    <div class="hero-image">
+                        <img src="assets/img/adoption-hero.png" alt="Animais para adoção" class="hero-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="filters-section">
+            <div class="container">
+                <div class="filters-content">
+                    <h2>Filtrar por:</h2>
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label for="species">Espécie</label>
+                            <select id="species" class="filter-select">
+                                <option value="all">Todos</option>
+                                <option value="dog">Cachorros</option>
+                                <option value="cat">Gatos</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="size">Porte</label>
+                            <select id="size" class="filter-select">
+                                <option value="all">Todos</option>
+                                <option value="small">Pequeno</option>
+                                <option value="medium">Médio</option>
+                                <option value="large">Grande</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="age">Idade</label>
+                            <select id="age" class="filter-select">
+                                <option value="all">Todas</option>
+                                <option value="puppy">Filhote</option>
+                                <option value="adult">Adulto</option>
+                                <option value="senior">Idoso</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="gender">Sexo</label>
+                            <select id="gender" class="filter-select">
+                                <option value="all">Todos</option>
+                                <option value="male">Macho</option>
+                                <option value="female">Fêmea</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lista de Animais -->
+        <section class="pets-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Animais Disponíveis</h2>
+                    <div class="pets-count">
+                        <span id="pets-count">12</span> animais encontrados
+                    </div>
+                </div>
+                
+                <div class="pets-grid">
+                    <!-- Thor -->
+                    <div class="pet-card" data-species="dog" data-size="medium" data-age="adult" data-gender="male">
+                        <div class="pet-image">
+                            <img src="assets/img/dog-1.jpg" alt="Thor - Cachorro para adoção">
+                            <span class="badge badge-primary">Disponível</span>
+                        </div>
+                        <div class="pet-info">
+                            <h3 class="pet-name">Thor</h3>
+                            <div class="pet-details">
+                                <span class="pet-species">Cachorro</span>
+                                <span class="pet-age">2 anos</span>
+                                <span class="pet-size">Porte médio</span>
+                                <span class="pet-gender">Macho</span>
+                            </div>
+                            <p class="pet-description">Thor é um cachorro brincalhão e muito carinhoso. Adora passeios e se dá bem com crianças e outros animais.</p>
+                            <div class="pet-traits">
+                                <span class="pet-trait">Carinhoso</span>
+                                <span class="pet-trait">Brincalhão</span>
+                                <span class="pet-trait">Sociável</span>
+                            </div>
+                            <div class="pet-actions">
+                                <button class="btn btn-primary" data-pet-modal="thor">Conhecer Thor</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Luna -->
+                    <div class="pet-card" data-species="cat" data-size="small" data-age="adult" data-gender="female">
+                        <div class="pet-image">
+                            <img src="assets/img/cat-1.jpg" alt="Luna - Gata para adoção">
+                            <span class="badge badge-primary">Disponível</span>
+                        </div>
+                        <div class="pet-info">
+                            <h3 class="pet-name">Luna</h3>
+                            <div class="pet-details">
+                                <span class="pet-species">Gata</span>
+                                <span class="pet-age">1 ano</span>
+                                <span class="pet-size">Porte pequeno</span>
+                                <span class="pet-gender">Fêmea</span>
+                            </div>
+                            <p class="pet-description">Luna é uma gata tranquila e independente. Gosta de carinho no seu próprio tempo e adora observar pela janela.</p>
+                            <div class="pet-traits">
+                                <span class="pet-trait">Calma</span>
+                                <span class="pet-trait">Independente</span>
+                                <span class="pet-trait">Curiosa</span>
+                            </div>
+                            <div class="pet-actions">
+                                <button class="btn btn-primary" data-pet-modal="luna">Conhecer Luna</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mel -->
+                    <div class="pet-card" data-species="dog" data-size="small" data-age="puppy" data-gender="female">
+                        <div class="pet-image">
+                            <img src="assets/img/dog-2.jpg" alt="Mel - Cachorrinha para adoção">
+                            <span class="badge badge-secondary">Reservado</span>
+                        </div>
+                        <div class="pet-info">
+                            <h3 class="pet-name">Mel</h3>
+                            <div class="pet-details">
+                                <span class="pet-species">Cachorro</span>
+                                <span class="pet-age">4 meses</span>
+                                <span class="pet-size">Porte pequeno</span>
+                                <span class="pet-gender">Fêmea</span>
+                            </div>
+                            <p class="pet-description">Mel é uma cachorrinha filhote muito dócil e brincalhona. Está esperando por um lar amoroso para crescer com carinho.</p>
+                            <div class="pet-traits">
+                                <span class="pet-trait">Dócil</span>
+                                <span class="pet-trait">Brincalhona</span>
+                                <span class="pet-trait">Inteligente</span>
+                            </div>
+                            <div class="pet-actions">
+                                <button class="btn btn-primary" data-pet-modal="mel">Conhecer Mel</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bob -->
+                    <div class="pet-card" data-species="cat" data-size="medium" data-age="adult" data-gender="male">
+                        <div class="pet-image">
+                            <img src="assets/img/cat-2.jpg" alt="Bob - Gato para adoção">
+                            <span class="badge badge-primary">Disponível</span>
+                        </div>
+                        <div class="pet-info">
+                            <h3 class="pet-name">Bob</h3>
+                            <div class="pet-details">
+                                <span class="pet-species">Gato</span>
+                                <span class="pet-age">3 anos</span>
+                                <span class="pet-size">Porte médio</span>
+                                <span class="pet-gender">Macho</span>
+                            </div>
+                            <p class="pet-description">Bob é um gato muito amigável e comunicativo. Adora brincar com bolinhas e receber carinho na barriga.</p>
+                            <div class="pet-traits">
+                                <span class="pet-trait">Amigável</span>
+                                <span class="pet-trait">Comunicativo</span>
+                                <span class="pet-trait">Ativo</span>
+                            </div>
+                            <div class="pet-actions">
+                                <button class="btn btn-primary" data-pet-modal="bob">Conhecer Bob</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nina -->
+                    <div class="pet-card" data-species="dog" data-size="large" data-age="senior" data-gender="female">
+                        <div class="pet-image">
+                            <img src="assets/img/dog-3.jpg" alt="Nina - Cachorra para adoção">
+                            <span class="badge badge-primary">Disponível</span>
+                        </div>
+                        <div class="pet-info">
+                            <h3 class="pet-name">Nina</h3>
+                            <div class="pet-details">
+                                <span class="pet-species">Cachorro</span>
+                                <span class="pet-age">8 anos</span>
+                                <span class="pet-size">Porte grande</span>
+                                <span class="pet-gender">Fêmea</span>
+                            </div>
+                            <p class="pet-description">Nina é uma senhora muito tranquila e educada. Perfeita para quem busca um companheiro calmo e amoroso.</p>
+                            <div class="pet-traits">
+                                <span class="pet-trait">Tranquila</span>
+                                <span class="pet-trait">Educada</span>
+                                <span class="pet-trait">Carinhosa</span>
+                            </div>
+                            <div class="pet-actions">
+                                <button class="btn btn-primary" data-pet-modal="nina">Conhecer Nina</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Simba -->
+                    <div class="pet-card" data-species="cat" data-size="small" data-age="puppy" data-gender="male">
+                        <div class="pet-image">
+                            <img src="assets/img/cat-3.jpg" alt="Simba - Gatinho para adoção">
+                            <span class="badge badge-primary">Disponível</span>
+                        </div>
+                        <div class="pet-info">
+                            <h3 class="pet-name">Simba</h3>
+                            <div class="pet-details">
+                                <span class="pet-species">Gato</span>
+                                <span class="pet-age">3 meses</span>
+                                <span class="pet-size">Porte pequeno</span>
+                                <span class="pet-gender">Macho</span>
+                            </div>
+                            <p class="pet-description">Simba é um gatinho muito energético e curioso. Adora explorar ambientes novos e brincar com outros gatos.</p>
+                            <div class="pet-traits">
+                                <span class="pet-trait">Energético</span>
+                                <span class="pet-trait">Curioso</span>
+                                <span class="pet-trait">Aventureiro</span>
+                            </div>
+                            <div class="pet-actions">
+                                <button class="btn btn-primary" data-pet-modal="simba">Conhecer Simba</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Load More -->
+                <div class="load-more">
+                    <button class="btn btn-outline" id="load-more">Carregar Mais Animais</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Processo de Adoção -->
+        <section class="process-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Processo de Adoção</h2>
+                </div>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Escolha seu amigo</h3>
+                        <p>Conheça nossos animais e escolha aquele que mais combina com você.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>Formulário de interesse</h3>
+                        <p>Preencha nosso formulário com suas informações e preferências.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>Entrevista e visita</h3>
+                        <p>Realizamos uma entrevista e agendamos uma visita ao abrigo.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3>Adoção responsável</h3>
+                        <p>Assinatura do termo de adoção e orientações para cuidados.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MundoPet</h3>
+                    <p>Conectando animais que precisam de um lar com pessoas dispostas a oferecer amor e cuidado.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <img src="assets/img/facebook-icon.svg" alt="Facebook">
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <img src="assets/img/instagram-icon.svg" alt="Instagram">
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <img src="assets/img/twitter-icon.svg" alt="Twitter">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Links rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                        <li><a href="adocao.html">Adoção</a></li>
+                        <li><a href="contatos.html">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <img src="assets/img/phone-icon.svg" alt="Telefone">
+                            <span>(11) 9999-9999</span>
+                        </li>
+                        <li>
+                            <img src="assets/img/email-icon.svg" alt="E-mail">
+                            <span>contato@mundopet.org</span>
+                        </li>
+                        <li>
+                            <img src="assets/img/location-icon.svg" alt="Localização">
+                            <span>Rua dos Animais, 123 - São Paulo, SP</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 MundoPet. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Animal -->
+    <div class="modal" id="pet-modal">
+        <div class="modal-content large">
+            <button class="modal-close" aria-label="Fechar modal">×</button>
+            <div class="modal-body">
+                <div class="pet-modal-content">
+                    <div class="pet-modal-image">
+                        <img src="" alt="" id="modal-pet-image">
+                    </div>
+                    <div class="pet-modal-info">
+                        <h3 id="modal-pet-name"></h3>
+                        <div class="pet-modal-details">
+                            <span id="modal-pet-species"></span>
+                            <span id="modal-pet-age"></span>
+                            <span id="modal-pet-size"></span>
+                            <span id="modal-pet-gender"></span>
+                        </div>
+                        <p id="modal-pet-description"></p>
+                        <div class="pet-modal-traits" id="modal-pet-traits"></div>
+                        <div class="pet-modal-actions">
+                            <button class="btn btn-primary" id="adopt-pet">Quero Adotar</button>
+                            <button class="btn btn-outline" data-modal-close>Voltar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/adoption.js"></script>
+</body>
+</html>
