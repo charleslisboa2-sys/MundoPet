@@ -141,3 +141,8 @@ Componentes de interface completos
 Estrutura de pastas organizada
 
 Link público do GitHub
+
+## 🌐 Link do Projeto Hospedado
+```bash
+
+https://charleslisboa2-sys.github.io/MundoPet/
